@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>RankedStream</title>
+    <meta name="description" content="RankedStream — top-rated movies & series (TMDB / OMDb demo)" />
+    <meta name="theme-color" content="#6d28d9" />
+
+    <!-- PWA manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- favicons / icons (place your icons in public/icons/) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-512.png" />
+
+    <!-- Tailwind CDN for quick prototyping (remove in production and use a built CSS) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Optional: tiny inlined styles to avoid FOUC on dark bg -->
+    <style>
+      html, body, #root { height: 100%; }
+      body { margin: 0; background: linear-gradient(180deg,#071026 0%, #071228 100%); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    </style>
+  </head>
+
+  <body class="antialiased text-slate-200">
+    <div id="root"></div>
+
+    <!-- Vite entry (TypeScript) -->
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Register service worker (expects /sw.js in build/public) -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').then(function(reg) {
+            console.log('ServiceWorker registration successful with scope:', reg.scope);
+          }).catch(function(err) {
+            console.warn('ServiceWorker registration failed:', err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
